@@ -1,20 +1,10 @@
-info:
+spring:
 
-  description: Spring Cloud Samples
+  profiles:  
 
-  url: https://github.com/spring-cloud-samples
-
-eureka:
-
-  client:
-
-    serviceUrl:
-
-      defaultZone: http://localhost:8761/eureka/
-
-      
-
-foo: baz
+    active: 
+    
+    - dev:
 
 
 
@@ -22,63 +12,11 @@ foo: baz
 
 spring:
 
-  profiles: cloud
+  profiles: dev
 
-  cloud:
+  application:
 
-    config:
-
-      uri: ${vcap.services.${PREFIX:}configserver.credentials.uri:http://user:password@${PREFIX:}configserver.${application.domain:cfapps.io}}
-
-oauth2:
-
-  client:
-
-    tokenUri: ${vcap.services.${PREFIX:}sso.credentials.tokenUri:}
-
-    authorizationUri: ${vcap.services.${PREFIX:}sso.credentials.authorizationUri:}
-
-    clientId: ${vcap.services.${PREFIX:}sso.credentials.clientId:}
-
-    clientSecret: ${vcap.services.${PREFIX:}sso.credentials.clientSecret:}
-
-  resource:
-
-    tokenInfoUri: ${vcap.services.${OAUTH2_RESOURCE_SERVICEID:${oauth2.resource.serviceId:sso}}.credentials.tokenInfoUri:}
-
-    serviceId: ${PREFIX:}resource
-
-application:
-
-  domain: ${APPLICATION_DOMAIN:cfapps.io}
-
-endpoints:
-
-  restart: enabled
-
-eureka:
-
-  password: password
-
-  instance:
-
-    hostname: ${vcap.application.uris[0]:localhost}
-
-    nonSecurePort: 80
-
-  client:
-
-    serviceUrl:
-
-      defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:${eureka.password:}@${PREFIX:}eureka.${application.domain:cfapps.io}}/eureka/
-
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
-
-ribbon:
-
-  ConnectTimeout: 3000
-
-  ReadTimeout: 60000
+    name: microservicecloud-config-tusvn-dev
 
 
 
@@ -86,28 +24,8 @@ ribbon:
 
 spring:
 
-  profiles: docker
+  profiles: test
 
-  cloud:
+  application:
 
-    config:
-
-      uri: http://${CONFIGSERVER_1_PORT_8888_TCP_ADDR:localhost}:8888
-
-endpoints:
-
-  restart: enabled
-
-eureka:
-
-  instance:
-
-    nonSecurePort: 80
-
-    preferIpAddress: true
-
-  client:
-
-    serviceUrl:
-
-      defaultZone: http://${EUREKA_1_PORT_8761_TCP_ADDR:localhost}:8761/eureka/
+    name: microservicecloud-config-tusvn-test
